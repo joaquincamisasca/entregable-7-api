@@ -1,0 +1,35 @@
+# Infraestructura local: Redis Stack + Arize Phoenix.
+# La API y Ollama corren en tu maquina (ver README.md).
+#
+#   docker compose up -d
+#
+# Redis Stack (no el Redis comun): el checkpointer de LangGraph usa los
+# modulos RediSearch y RedisJSON, que Redis Stack ya trae incluidos.
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: orquestador-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    container_name: orquestador-phoenix
+    ports:
+      - "6006:6006"   # UI + recepcion de trazas (OTLP/HTTP)
+      - "4317:4317"   # OTLP/gRPC
+    environment:
+      - PHOENIX_WORKING_DIR=/mnt/data
+    volumes:
+      - phoenix_data:/mnt/data
+
+volumes:
+  redis_data:
+  phoenix_data:

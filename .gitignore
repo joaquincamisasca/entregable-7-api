@@ -1,0 +1,19 @@
+# Variables de entorno (nunca subir secretos)
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Datos locales de Phoenix
+phoenix_data/

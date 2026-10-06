@@ -1,0 +1,28 @@
+# --- API ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.7,<3.0
+python-dotenv>=1.0
+httpx>=0.27
+
+# --- Estado y cola (Redis) ---
+redis>=5.0
+# Checkpointer de LangGraph sobre Redis. Requiere Redis Stack u 8+ (RediSearch + RedisJSON).
+langgraph-checkpoint-redis>=0.5,<0.6
+
+# --- Orquestador multi-agente (Módulo 6) ---
+langgraph>=1.0,<2.0
+langchain>=1.0,<2.0
+langchain-core>=1.0,<2.0
+langchain-ollama>=1.0,<2.0
+langchain-openai>=1.0,<2.0
+langchain-anthropic>=1.0,<2.0
+
+# --- Observabilidad (Arize Phoenix vía OpenInference) ---
+arize-phoenix-otel>=0.17
+openinference-instrumentation-langchain>=0.1.70
+
+# --- Tests (no necesitan Redis, Phoenix ni LLM reales) ---
+pytest>=8.0
+pytest-asyncio>=0.24
+fakeredis>=2.26
